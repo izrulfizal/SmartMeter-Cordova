@@ -89,22 +89,26 @@ function liveReading(data){
 }
 
 // Get Appliances Reading
+function updateAppliances(){
 $.ajax({ 
     type: 'GET', 
     url: 'https://api.thingspeak.com/channels/736997/feeds.json?results=1', 
     data: { get_param: 'value' }, 
     dataType: 'json',
     success: function (data) { 
-            console.log("Appliances:")
-            console.log(data.feeds);
+            //console.log("Appliances:")
+            //console.log(data.feeds);
             appliancesReading(data.feeds);
             
         }
     
 });
+setTimeout(updateAppliances,3000);
+}
 
 
 updateLiveReading();
+updateAppliances();
 
 
 function appliancesReading(data){
